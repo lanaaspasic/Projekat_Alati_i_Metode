@@ -70,3 +70,41 @@
     (fact
       (highly-rated? {:rating 2.0})
       => false)
+
+    (fact
+      (has-genre? {:genres ["Sci-Fi" "Action"]} "Sci-Fi")
+      => true
+
+      (has-genre? {:genres ["Sci-Fi" "Action"]} "Comedy")
+      => false
+
+      (has-genre? {:genres []} "Drama")
+      => false)
+
+    (fact
+      (filter-by-genre [{:id 1 :genres ["Sci-Fi" "Action"]}
+                        {:id 2 :genres ["Drama"]}
+                        {:id 3 :genres ["Sci-Fi"]}]
+                       "Sci-Fi")
+      => [{:id 1 :genres ["Sci-Fi" "Action"]}
+          {:id 3 :genres ["Sci-Fi"]}]
+
+      (filter-by-genre [{:id 1 :genres ["Drama"]}] "Comedy")
+      => []
+
+      (filter-by-genre [] "Sci-Fi")
+      => [])
+
+    (fact
+      (user-logs [{:id 1 :user-id 5 :rating 4}
+                  {:id 2 :user-id 6 :rating 5}
+                  {:id 3 :user-id 5 :rating 3}]
+                 5)
+      => [{:id 1 :user-id 5 :rating 4}
+          {:id 3 :user-id 5 :rating 3}]
+
+      (user-logs [{:id 1 :user-id 6 :rating 5}] 5)
+      => []
+
+      (user-logs [] 5)
+      => [])

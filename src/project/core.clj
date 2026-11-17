@@ -36,3 +36,16 @@
     true
     false))
 
+
+  (defn has-genre?
+    [movie genre]
+    (boolean (some #(= genre %) (:genres movie))))
+
+    (defn filter-by-genre
+      [movies genre]
+      (filter #(has-genre? % genre) movies))
+
+    (defn user-logs
+      [logs user-id]
+      (filter #(= (:user-id %) user-id) logs))
+
